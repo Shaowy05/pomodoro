@@ -1,0 +1,179 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+
+  background-color: whitesmoke;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+
+  background-color: whitesmoke;
+
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.option {
+  grid-column: auto / span 2;
+
+  height: inherit;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#work-text {
+  background-image: linear-gradient(50deg, #9760c4, #6079c4);
+}
+
+#work-input-container {
+  background: linear-gradient(whitesmoke, whitesmoke) padding-box,
+    linear-gradient(60deg, #9760c4, #6079c4) border-box;
+}
+
+#rest-text {
+  background-image: linear-gradient(50deg, #6079c4, #60aec4);
+}
+
+#rest-input-container {
+  background: linear-gradient(whitesmoke, whitesmoke) padding-box,
+    linear-gradient(60deg, #6079c4, #60aec4) border-box;
+}
+
+#cycles-text {
+  background-image: linear-gradient(50deg, #60aec4, #60c495);
+}
+
+#cycles-input-container {
+  background: linear-gradient(whitesmoke, whitesmoke) padding-box,
+    linear-gradient(60deg, #60aec4, #60c495) border-box;
+}
+
+.option > p {
+  font-size: 2.5rem;
+  font-family: sans-serif;
+
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+#title {
+  font-size: 4rem;
+  font-family: sans-serif;
+
+  background-image: linear-gradient(60deg, #57d1bd, #59d585);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+#timer-options {
+  width: 50rem;
+  height: 20rem;
+
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.time-input-container {
+  width: 10rem;
+  height: 10rem;
+
+  border: 2px solid transparent;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.time-input {
+  width: 7rem;
+  height: 7rem;
+
+  background-color: whitesmoke;
+  border-color: transparent;
+
+  text-align: center;
+  font-size: 3rem;
+  font-family: sans-serif;
+  font-weight: lighter; 
+  color: grey;
+}
+
+.time-input:focus {
+  outline: none;
+  text-align: center;
+}
+
+.time-input:focus::placeholder {
+  color: transparent;
+}
+
+.time-input::-webkit-inner-spin-button,
+.time-input::-webkit-outer-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+.buttons-container {
+  grid-column: auto / span 6;  
+
+  height: 6rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.action-button {
+  width: 5rem;
+  height: 3rem;
+
+  margin: 1rem;
+
+  text-align: center;
+  font-family: sans-serif;
+  font-weight:lighter;
+  font-size: 1rem;
+  color: whitesmoke;
+
+  border-radius: 10%;
+  border-style: none;
+
+  transition: 150ms;
+
+  cursor: pointer;
+}
+
+.action-button:hover {
+  width: 5.2rem;
+  height: 3.2rem;
+
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  border: 2px solid transparent;
+}
+
+#start-button {
+  background-image: linear-gradient(50deg, #946ac6, #6087c4);
+}
+
+#reset-button {
+  background-image: linear-gradient(130deg, #6087c4, #60baaa);
+}

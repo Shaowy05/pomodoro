@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pomodoro</title>
+  </head>
+  <body>
+    <div id="app">
+      <nav>
+        <h1 id="title">Pomodoro</h1>
+      </nav>
+      <form id="timer-options" class="center">
+        <div id="work" class="option" >
+          <p id="work-text">Work</p>
+          <div id="work-input-container" class="time-input-container">
+            <input
+              class="time-input"
+              id="work-input"
+              placeholder="0"
+              type="number"
+            />
+          </div>
+        </div>
+        <div id="rest" class="option">
+          <p id="rest-text">Rest</p>
+          <div id="rest-input-container" class="time-input-container">
+            <input
+              class="time-input"
+              id="rest-input"
+              placeholder="0"
+              type="number"
+            />
+          </div>
+        </div>
+        <div id="cycles" class="option">
+          <p id="cycles-text">Cycles</p>
+          <div id="cycles-input-container" class="time-input-container">
+            <input
+              class="time-input"
+              id="cycles-input"
+              placeholder="0"
+              type="number"
+            />
+          </div>
+        </div>
+        <div class="buttons-container">
+          <button id="start-button" class="action-button">
+            Start
+          </button>
+          <button id="reset-button" class="action-button">
+            Reset
+          </button>
+        </div>
+      </form>
+      <p id="i"></p>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
