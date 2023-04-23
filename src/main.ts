@@ -1,7 +1,7 @@
 import './style.css'
 
 // Polling time for the timer (milliseconds)
-const TIMER_REFRESH_DELAY = 100
+const TIMER_REFRESH_DELAY = 10
 
 const SECTION_CONTAINERS = document.getElementsByClassName('section')
 
@@ -92,8 +92,6 @@ const startTimer = (work: number, rest: number, cycles: number) => {
         checkpoints.push((i + 1) * CYCLE_IN_MS)
     }
 
-    console.log(checkpoints)
-
     const startTime = Date.now()
 
     let working = true
@@ -114,6 +112,7 @@ const startTimer = (work: number, rest: number, cycles: number) => {
 
             // If it was the last checkpoint, end the timer.
             if (checkpoints.shift() === cycles * CYCLE_IN_MS) {
+                resetInterface()
                 clearInterval(timer)
             }
         } else {
@@ -167,4 +166,35 @@ const formatTime = (delta: number, nextCheckpoint: number): string => {
     const minuteBuffer = (minutes < 10) ? 0 : ''
 
     return `${minuteBuffer}${minutes}:${secondBuffer}${seconds}`
+}
+
+// Resets the user interface after the timer has finished.
+const resetInterface = () => {
+    // First we hide the timer display inside the middle section
+    MIDDLE_SECTION_TEXT.setAttribute('hidden', '')
+
+    // Then we resize the container to the original size
+    MIDDLE_INPUT_CONTAINER.style.height = '10rem'
+    MIDDLE_INPUT_CONTAINER.style.width = '10rem'
+
+    // Returning the left and right sections
+    for (let i = 0; i < SECTION_CONTAINERS.length; i++) {
+        let optionContainer = SECTION_CONTAINERS[i] as HTMLDivElement 
+
+        if (optionContainer.id !== 'middle-section') {
+            optionContainer.style.opacity = '1'
+        }
+    }
+
+    // Enabling the input fields for all of the sections
+    for (let i = 0; i < TIME_INPUTS.length; i++) {
+        TIME_INPUTS[i].removeAttribute('disabled')
+    }
+
+    // Resetting the middle text to rest
+    MIDDLE_SECTION_TEXT.innerHTML = 'Rest'
+
+    // Finally we return the buttons to their original state
+    LEFT_BUTTON.removeAttribute('hidden')
+    RIGHT_BUTTON.removeAttribute('hidden')
 }
