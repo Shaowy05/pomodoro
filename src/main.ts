@@ -18,6 +18,10 @@ const TIMER_DISPLAY = document.getElementById(
     'timer-display'
 ) as HTMLParagraphElement
 
+const MIDDLE_SECTION_TEXT = document.getElementById(
+    'middle-section-text'
+) as HTMLParagraphElement
+
 // Left and Right buttons
 const LEFT_BUTTON = document.getElementById('left-button') as HTMLButtonElement
 const RIGHT_BUTTON = document.getElementById('right-button') as HTMLButtonElement
@@ -101,6 +105,13 @@ const startTimer = (work: number, rest: number, cycles: number) => {
             // Toggle the state that the user is in
             working = !working
 
+            // Change the text of the middle section
+            if (working) {
+                MIDDLE_SECTION_TEXT.innerHTML = 'Work'
+            } else {
+                MIDDLE_SECTION_TEXT.innerHTML = 'Rest'
+            }
+
             // If it was the last checkpoint, end the timer.
             if (checkpoints.shift() === cycles * CYCLE_IN_MS) {
                 clearInterval(timer)
@@ -123,6 +134,8 @@ const switchInterface = () => {
     MIDDLE_INPUT_CONTAINER.style.width = '12rem'
     MIDDLE_INPUT_CONTAINER.style.height = '12rem'
 
+    MIDDLE_SECTION_TEXT.innerHTML = 'Work'
+
     MIDDLE_INPUT.setAttribute('hidden', '')
 
     TIMER_DISPLAY.removeAttribute('hidden')
@@ -141,9 +154,17 @@ const switchInterface = () => {
     }
 }
 
-// Takes in 
+// Takes in the change in time and the next checkpoint and formats the
+// time left into minutes and seconds
 const formatTime = (delta: number, nextCheckpoint: number): string => {
-    
 
-    return ''
+    const timeLeftInSeconds = Math.trunc((nextCheckpoint - delta) / 1000)
+
+    const seconds = timeLeftInSeconds % 60
+    const minutes = (timeLeftInSeconds - seconds) / 60
+
+    const secondBuffer = (seconds < 10) ? 0 : ''
+    const minuteBuffer = (minutes < 10) ? 0 : ''
+
+    return `${minuteBuffer}${minutes}:${secondBuffer}${seconds}`
 }
