@@ -23,7 +23,7 @@ nav {
   transform: translate(-50%, -50%);
 }
 
-.option {
+.section {
   grid-column: auto / span 2;
 
   height: inherit;
@@ -32,36 +32,42 @@ nav {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  transition: opacity 0.5s ease-in-out;
 }
 
-#work-text {
+.section-hidden {
+  opacity: 0;
+}
+
+#left-section-text {
   background-image: linear-gradient(50deg, #9760c4, #6079c4);
 }
 
-#work-input-container {
+#left-input-container {
   background: linear-gradient(whitesmoke, whitesmoke) padding-box,
     linear-gradient(60deg, #9760c4, #6079c4) border-box;
 }
 
-#rest-text {
+#middle-section-text {
   background-image: linear-gradient(50deg, #6079c4, #60aec4);
 }
 
-#rest-input-container {
+#middle-input-container {
   background: linear-gradient(whitesmoke, whitesmoke) padding-box,
     linear-gradient(60deg, #6079c4, #60aec4) border-box;
 }
 
-#cycles-text {
+#right-section-text {
   background-image: linear-gradient(50deg, #60aec4, #60c495);
 }
 
-#cycles-input-container {
+#right-input-container {
   background: linear-gradient(whitesmoke, whitesmoke) padding-box,
     linear-gradient(60deg, #60aec4, #60c495) border-box;
 }
 
-.option > p {
+.section > p {
   font-size: 2.5rem;
   font-family: sans-serif;
 
@@ -74,13 +80,13 @@ nav {
   font-size: 4rem;
   font-family: sans-serif;
 
-  background-image: linear-gradient(60deg, #57d1bd, #59d585);
+  background-image: linear-gradient(60deg, #6c74c4, #60b2bb);
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
 }
 
-#timer-options {
+#timer-sections {
   width: 50rem;
   height: 20rem;
 
@@ -88,7 +94,7 @@ nav {
   grid-template-columns: repeat(6, 1fr);
 }
 
-.time-input-container {
+.input-container {
   width: 10rem;
   height: 10rem;
 
@@ -100,11 +106,27 @@ nav {
   align-items: center;
 }
 
+#timer-display {
+  width: 7em;
+  height: 7rem;
+
+  background-color: transparent;
+  border-color: transparent;
+
+  text-align: center;
+  font-size: 3rem;
+  font-family: sans-serif;
+  font-weight: lighter; 
+  color: grey;
+
+  line-height: 112px;
+}
+
 .time-input {
   width: 7rem;
   height: 7rem;
 
-  background-color: whitesmoke;
+  background-color: transparent;
   border-color: transparent;
 
   text-align: center;
@@ -170,10 +192,10 @@ nav {
   border: 2px solid transparent;
 }
 
-#start-button {
+#left-button {
   background-image: linear-gradient(50deg, #946ac6, #6087c4);
 }
 
-#reset-button {
+#right-button {
   background-image: linear-gradient(130deg, #6087c4, #60baaa);
 }

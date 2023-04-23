@@ -1,23 +1,32 @@
 import './style.css'
 
-// Preventing the user from typing more than 3 characters
-const TIME_INPUTS = document.getElementsByClassName('time-input');
+// Polling time for the timer (milliseconds)
+const TIMER_REFRESH_DELAY = 100
 
-for (let i = 0; i < TIME_INPUTS.length; i++) {
-    TIME_INPUTS[i]?.addEventListener('input', (e: Event) => {
-        const target = e.target as HTMLInputElement
+const SECTION_CONTAINERS = document.getElementsByClassName('section')
 
-        if (!target) return 
+// Middle section elements
+const MIDDLE_INPUT_CONTAINER = document.getElementById(
+    'middle-input-container'
+) as HTMLDivElement
 
-        // Here we restrict the length of the input field to three digits
-        if (target.value.length > 3) target.value = target.value.slice(0, 3)
-    })
-}
+const MIDDLE_INPUT = document.getElementById(
+    'middle-input'
+) as HTMLInputElement
 
-// When the user presses start
-const START_BUTTON = document.getElementById('start-button');
+const TIMER_DISPLAY = document.getElementById(
+    'timer-display'
+) as HTMLParagraphElement
 
-START_BUTTON?.addEventListener('click', (e: Event) => {
+// Left and Right buttons
+const LEFT_BUTTON = document.getElementById('left-button') as HTMLButtonElement
+const RIGHT_BUTTON = document.getElementById('right-button') as HTMLButtonElement
+
+// Input elements for the timer options
+const TIME_INPUTS = document.getElementsByClassName('time-input') as HTMLCollectionOf<HTMLInputElement>
+
+// When the user starts the timer
+LEFT_BUTTON.addEventListener('click', (e: Event) => {
     e.preventDefault()
 
     try {
@@ -33,6 +42,8 @@ START_BUTTON?.addEventListener('click', (e: Event) => {
         ) {
             console.log("Incorrect Input")
         } else {
+            switchInterface()
+
             startTimer(work, rest, cycles)
         } 
 
@@ -44,7 +55,27 @@ START_BUTTON?.addEventListener('click', (e: Event) => {
 
 })
 
-const TIMER_REFRESH_DELAY = 100
+// Listener for right button to reset the timer options on click
+RIGHT_BUTTON.addEventListener('click' , (e) => {
+    e.preventDefault()
+
+    for (let i = 0; i < TIME_INPUTS.length; i++) {
+        (TIME_INPUTS[i] as HTMLInputElement).value = ""
+    }
+})
+
+// Preventing the user from typing more than 3 characters
+for (let i = 0; i < TIME_INPUTS.length; i++) {
+    TIME_INPUTS[i]?.addEventListener('input', (e: Event) => {
+        const target = e.target as HTMLInputElement
+
+        if (!target) return 
+
+        // Here we restrict the length of the input field to three digits
+        if (target.value.length > 3) target.value = target.value.slice(0, 3)
+    })
+}
+
 const startTimer = (work: number, rest: number, cycles: number) => {
     const WORK_IN_MS = work * 60 * 1000
     const REST_IN_MS = rest * 60 * 1000
@@ -74,17 +105,45 @@ const startTimer = (work: number, rest: number, cycles: number) => {
             if (checkpoints.shift() === cycles * CYCLE_IN_MS) {
                 clearInterval(timer)
             }
+        } else {
+            TIMER_DISPLAY.innerHTML = formatTime(deltaTime, checkpoints[0])
         }
     }, TIMER_REFRESH_DELAY)
 }
 
-// Event listener and function for the reset button
-const RESET_BUTTON = document.getElementById('reset-button')
-
-RESET_BUTTON?.addEventListener('click' , (e) => {
-    e.preventDefault()
-
+// Hides the left and right sections to leave the middle alongside changing
+// the relevant UI elements to reflect the new state of the app.
+const switchInterface = () => {
+    // Disabling all the inputs
     for (let i = 0; i < TIME_INPUTS.length; i++) {
-        (TIME_INPUTS[i] as HTMLInputElement).value = ""
+        TIME_INPUTS[i].setAttribute('disabled', '')
     }
-})
+
+    // Adjusting the middle section
+    MIDDLE_INPUT_CONTAINER.style.width = '12rem'
+    MIDDLE_INPUT_CONTAINER.style.height = '12rem'
+
+    MIDDLE_INPUT.setAttribute('hidden', '')
+
+    TIMER_DISPLAY.removeAttribute('hidden')
+
+    // Changing the action buttons
+    LEFT_BUTTON.setAttribute('hidden', '')
+    RIGHT_BUTTON.setAttribute('hidden', '')
+
+    // Hiding the left and right sections
+    for (let i = 0; i < SECTION_CONTAINERS.length; i++) {
+        let optionContainer = SECTION_CONTAINERS[i] as HTMLDivElement 
+
+        if (optionContainer.id !== 'middle-section') {
+            optionContainer.style.opacity = '0'
+        }
+    }
+}
+
+// Takes in 
+const formatTime = (delta: number, nextCheckpoint: number): string => {
+    
+
+    return ''
+}

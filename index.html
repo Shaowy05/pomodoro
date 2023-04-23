@@ -11,50 +11,50 @@
       <nav>
         <h1 id="title">Pomodoro</h1>
       </nav>
-      <form id="timer-options" class="center">
-        <div id="work" class="option" >
-          <p id="work-text">Work</p>
-          <div id="work-input-container" class="time-input-container">
+      <form id="timer-sections" class="center">
+        <div id="left-section" class="section" >
+          <p id="left-section-text">Work</p>
+          <div id="left-input-container" class="input-container">
             <input
               class="time-input"
-              id="work-input"
+              id="left-input"
               placeholder="0"
               type="number"
             />
           </div>
         </div>
-        <div id="rest" class="option">
-          <p id="rest-text">Rest</p>
-          <div id="rest-input-container" class="time-input-container">
+        <div id="middle-section" class="section">
+          <p id="middle-section-text">Rest</p>
+          <div id="middle-input-container" class="input-container">
             <input
               class="time-input"
-              id="rest-input"
+              id="middle-input"
               placeholder="0"
               type="number"
             />
+            <p id="timer-display" hidden></p>
           </div>
         </div>
-        <div id="cycles" class="option">
-          <p id="cycles-text">Cycles</p>
-          <div id="cycles-input-container" class="time-input-container">
+        <div id="right-section" class="section">
+          <p id="right-section-text">Cycles</p>
+          <div id="right-input-container" class="input-container">
             <input
               class="time-input"
-              id="cycles-input"
+              id="right-input"
               placeholder="0"
               type="number"
             />
           </div>
         </div>
         <div class="buttons-container">
-          <button id="start-button" class="action-button">
+          <button id="left-button" class="action-button">
             Start
           </button>
-          <button id="reset-button" class="action-button">
+          <button id="right-button" class="action-button">
             Reset
           </button>
         </div>
       </form>
-      <p id="i"></p>
     </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
