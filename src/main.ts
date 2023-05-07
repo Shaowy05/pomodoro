@@ -3,6 +3,7 @@ import './style.css'
 // Polling time for the timer (milliseconds)
 const TIMER_REFRESH_DELAY = 10
 
+// Containers for each of the sections
 const SECTION_CONTAINERS = document.getElementsByClassName('section')
 
 // Middle section elements
@@ -39,12 +40,21 @@ LEFT_BUTTON.addEventListener('click', (e: Event) => {
         const rest = parseInt((TIME_INPUTS[1] as HTMLInputElement).value)
         const cycles = parseInt((TIME_INPUTS[2] as HTMLInputElement).value)
 
+        const inputs = [work, rest, cycles]
+
         if (
-            [work, rest, cycles].some((element) => Number.isNaN(element))
+            inputs.some((element) => Number.isNaN(element))
             ||
-            [work, rest, cycles].some((element) => element === 0)
+            inputs.some((element) => element === 0)
         ) {
-            console.log("Incorrect Input")
+            for (let i = 0; i < TIME_INPUTS.length; i++) {
+                TIME_INPUTS[i].style.animationPlayState = 'running'
+                TIME_INPUTS[i].style.webkitAnimationPlayState = 'running'
+                setTimeout(() => {
+                    TIME_INPUTS[i].style.animationPlayState = 'paused'
+                    TIME_INPUTS[i].style.webkitAnimationPlayState = 'paused'
+                },200)
+            }
         } else {
             switchInterface()
 
@@ -171,7 +181,10 @@ const formatTime = (delta: number, nextCheckpoint: number): string => {
 // Resets the user interface after the timer has finished.
 const resetInterface = () => {
     // First we hide the timer display inside the middle section
-    MIDDLE_SECTION_TEXT.setAttribute('hidden', '')
+    TIMER_DISPLAY.setAttribute('hidden', '')
+
+    // Then we remove the hidden attribute from the middle input
+    MIDDLE_INPUT.removeAttribute('hidden')
 
     // Then we resize the container to the original size
     MIDDLE_INPUT_CONTAINER.style.height = '10rem'

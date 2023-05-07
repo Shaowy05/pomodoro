@@ -134,6 +134,21 @@ nav {
   font-family: sans-serif;
   font-weight: lighter; 
   color: grey;
+
+  animation-play-state: paused;
+
+  animation-name: shake;
+  -webkit-animation-name: shake;
+  animation-duration: 200ms;
+  -webkit-animation-duration: 200ms;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0) }
+  25% { transform: translateX(5px) }
+  50% { transform: translateX(-5px) }
+  75% { transform: translateX(5px) }
+  100% { transform: translateX(0) }
 }
 
 .time-input:focus {
