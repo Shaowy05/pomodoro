@@ -141,6 +141,7 @@ nav {
   -webkit-animation-name: shake;
   animation-duration: 200ms;
   -webkit-animation-duration: 200ms;
+  animation-iteration-count: infinite;
 }
 
 @keyframes shake {
