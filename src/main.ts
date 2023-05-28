@@ -30,6 +30,10 @@ const RIGHT_BUTTON = document.getElementById('right-button') as HTMLButtonElemen
 // Input elements for the timer options
 const TIME_INPUTS = document.getElementsByClassName('time-input') as HTMLCollectionOf<HTMLInputElement>
 
+// Audio HTML tags
+const BEEP_AUDIO = document.getElementById('beep-audio') as HTMLAudioElement
+const FINAL_BEEP_AUDIO = document.getElementById('final-beep-audio') as HTMLAudioElement
+
 // When the user starts the timer
 LEFT_BUTTON.addEventListener('click', (e: Event) => {
     e.preventDefault()
@@ -58,12 +62,22 @@ LEFT_BUTTON.addEventListener('click', (e: Event) => {
         } else {
             switchInterface()
 
-            startTimer(work, rest, cycles)
+            // Initialising the countdown timeer
+            let count = 3
+            const countdown = setInterval(() => {
+                if (count !== 0) {
+                    BEEP_AUDIO.play()
+                    TIMER_DISPLAY.innerHTML = count.toString()
+                    count--
+                } else {
+                    FINAL_BEEP_AUDIO.play()
+                    startTimer(work, rest, cycles)
+                    clearInterval(countdown)
+                }
+            }, 1000)
         } 
 
     } catch(err) {
-
-
         console.log(err)
     }
 
@@ -120,6 +134,9 @@ const startTimer = (work: number, rest: number, cycles: number) => {
                 MIDDLE_SECTION_TEXT.innerHTML = 'Rest'
             }
 
+            // Play the final beep audio to signify a change
+            FINAL_BEEP_AUDIO.play()
+
             // If it was the last checkpoint, end the timer.
             if (checkpoints.shift() === cycles * CYCLE_IN_MS) {
                 resetInterface()
@@ -127,6 +144,18 @@ const startTimer = (work: number, rest: number, cycles: number) => {
             }
         } else {
             TIMER_DISPLAY.innerHTML = formatTime(deltaTime, checkpoints[0])
+
+            // Begin beep sequence if time is '00:03'
+            let count = 3
+            const countdown = setInterval(() => {
+                if (count !== 0) {
+                    BEEP_AUDIO.play()
+                    count--
+                } else {
+                    clearInterval(countdown)
+                }
+            }, 1000)
+            
         }
     }, TIMER_REFRESH_DELAY)
 }
